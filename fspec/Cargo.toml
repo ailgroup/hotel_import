@@ -1,0 +1,8 @@
+[package]
+name = "fspec"
+version = "0.1.0"
+authors = ["Joshua Bowles <jbowayles@gmail.com>"]
+
+[dependencies]
+chrono = "0.4"
+

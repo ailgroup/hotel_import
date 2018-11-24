@@ -1,0 +1,8 @@
+[package]
+name = "hotel_import"
+version = "0.1.0"
+authors = ["Joshua Bowles <jbowayles@gmail.com>"]
+
+[dependencies]
+fspec = {path="fspec"}
+migrant_lib = "0.20.0"
