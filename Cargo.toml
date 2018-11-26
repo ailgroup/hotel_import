@@ -5,4 +5,6 @@ authors = ["Joshua Bowles <jbowayles@gmail.com>"]
 
 [dependencies]
 fspec = {path="fspec"}
+dbcon = {path="dbcon"}
 migrant_lib = "0.20.0"
+chrono = "0.4"

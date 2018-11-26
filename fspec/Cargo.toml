@@ -5,4 +5,5 @@ authors = ["Joshua Bowles <jbowayles@gmail.com>"]
 
 [dependencies]
 chrono = "0.4"
-
+dbcon = {path="../dbcon"}
+postgres = {version = "0.15", features = ["with-chrono"]}
