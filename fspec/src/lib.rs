@@ -12,7 +12,6 @@ pub struct Filespec {
 }
 
 // methods
-//#[allow(dead_code)]
 impl Filespec {
     pub fn register_download(
         &self,
@@ -21,8 +20,8 @@ impl Filespec {
     ) -> Result<String, postgres::Error> {
         let now: DateTime<Utc> = Utc::now();
         let elapsed = now.signed_duration_since(started).num_seconds();
-        let qs = "INSERT INTO download_registers(started_at,finished_at,download_time_seconds,download_target_file,supply_origin_url,supplier) VALUES($1,$2,$3,$4,$5,$6);";
 
+        let qs = "INSERT INTO download_registers(started_at,finished_at,download_time_seconds,download_target_file,supply_origin_url,supplier) VALUES($1,$2,$3,$4,$5,$6);";
         conn.execute(
             qs,
             &[
@@ -43,7 +42,6 @@ impl Filespec {
 }
 
 // related functions
-#[allow(dead_code)]
 impl Filespec {
     pub fn new(
         supplier: String,
