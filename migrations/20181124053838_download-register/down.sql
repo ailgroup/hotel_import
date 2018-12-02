@@ -1,1 +1,1 @@
-DROP TABLE download_registers;
+DROP TABLE register_downloads;

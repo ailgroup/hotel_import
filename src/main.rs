@@ -3,7 +3,7 @@ extern crate dbcon;
 extern crate fspec;
 use chrono::{DateTime, Utc};
 use dbcon::DBConn;
-use fspec::Filespec;
+use fspec::file_spec::Filespec;
 use std::env;
 use std::thread::sleep;
 use std::time::Duration;
@@ -23,8 +23,9 @@ fn main() {
 
     let (n, h, d, p) = creds();
     let supplier = String::from("expedia");
-    let source_url = String::from("https://expedia.com");
-    let lfnam = String::from("hotels.csv");
+    let source_url =
+        String::from("https://www.ian.com/affiliatecenter/include/V2/ActivePropertyList.zip");
+    let lfnam = String::from("ActivePropertyList.zip");
     let dirname = String::from("ean_hotels");
     let fs = Filespec::new(supplier, source_url, lfnam, dirname);
     println!("Hello, world!");
@@ -52,7 +53,11 @@ fn main() {
         }
     };
     println!("DB success! {:?}", db);
-    let re = match fs.register_download(started, db) {
+    let success = match fs.download_file_with_name() {
+        Ok(()) => (true, String::from("ok")),
+        Err(e) => (false, e.to_string()),
+    };
+    let re = match fs.register_download(started, success.0, success.1, db) {
         Ok(p) => (p),
         Err(why) => why.to_string(),
     };

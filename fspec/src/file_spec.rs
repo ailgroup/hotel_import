@@ -5,10 +5,10 @@ use self::chrono::{DateTime, Utc};
 use std::fmt;
 
 pub struct Filespec {
-    supplier: String,
-    url: String,
-    local_filename: String,
-    download_dir: String,
+    pub supplier: String,
+    pub url: String,
+    pub local_filename: String,
+    pub download_dir: String,
 }
 
 // methods
@@ -16,17 +16,21 @@ impl Filespec {
     pub fn register_download(
         &self,
         started: DateTime<Utc>,
+        ok_success: bool,
+        status_msg: String,
         conn: postgres::Connection,
     ) -> Result<String, postgres::Error> {
         let now: DateTime<Utc> = Utc::now();
         let elapsed = now.signed_duration_since(started).num_seconds();
 
-        let qs = "INSERT INTO download_registers(started_at,finished_at,download_time_seconds,download_target_file,supply_origin_url,supplier) VALUES($1,$2,$3,$4,$5,$6);";
+        let qs = "INSERT INTO register_downloads(started_at,finished_at,success,status_msg,download_time_seconds,download_target_file,supply_origin_url,supplier) VALUES($1,$2,$3,$4,$5,$6,$7,$8);";
         conn.execute(
             qs,
             &[
                 &started,
                 &now,
+                &ok_success,
+                &status_msg,
                 &elapsed,
                 &self.local_filename,
                 &self.url,
