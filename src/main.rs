@@ -5,8 +5,8 @@ use chrono::{DateTime, Utc};
 use dbcon::DBConn;
 use fspec::file_spec::Filespec;
 use std::env;
-use std::thread::sleep;
-use std::time::Duration;
+//use std::thread::sleep;
+//use std::time::Duration;
 
 fn creds() -> (String, String, String, String) {
     (
@@ -18,8 +18,7 @@ fn creds() -> (String, String, String, String) {
 }
 
 fn main() {
-    let started: DateTime<Utc> = Utc::now();
-    sleep(Duration::new(1, 0));
+    //sleep(Duration::new(1, 0));
 
     let (n, h, d, p) = creds();
     let supplier = String::from("expedia");
@@ -53,6 +52,7 @@ fn main() {
         }
     };
     println!("DB success! {:?}", db);
+    let started: DateTime<Utc> = Utc::now();
     let success = match fs.download_file_with_name() {
         Ok(()) => (true, String::from("ok")),
         Err(e) => (false, e.to_string()),
