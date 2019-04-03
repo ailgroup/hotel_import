@@ -3,7 +3,7 @@ extern crate dbcon;
 extern crate fspec;
 use chrono::{DateTime, Utc};
 use dbcon::DBConn;
-use fspec::file_spec::Filespec;
+use fspec::file_spec::FileSpec;
 use std::env;
 //use std::thread::sleep;
 //use std::time::Duration;
@@ -26,7 +26,7 @@ fn main() {
         String::from("https://www.ian.com/affiliatecenter/include/V2/ActivePropertyList.zip");
     let lfnam = String::from("ActivePropertyList.zip");
     let dirname = String::from("ean_hotels");
-    let fs = Filespec::new(supplier, source_url, lfnam, dirname);
+    let fs = FileSpec::new(supplier, source_url, lfnam, dirname);
     println!("Hello, world!");
     println!("DB creds: {},{},{},{}", n, h, d, p);
     println!("Expedia Filespec: {}", fs);
